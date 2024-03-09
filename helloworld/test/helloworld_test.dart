@@ -1,8 +1,8 @@
-import 'package:helloworld/helloworld.dart';
-import 'package:test/test.dart';
+import "../lib/helloworld.dart" as helloworld;
+import "package:test/test.dart";
 
 void main() {
   test('calculate', () {
-    expect(calculate(), 42);
+    expect(helloworld.calculate(), 42);
   });
 }
