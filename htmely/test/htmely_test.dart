@@ -13,7 +13,7 @@ void main() {
 
   final HtmlTagTests htmlTagTests = HtmlTagTests(); 
   htmlTagTests.run();
-
-  final HtmlConverterTests converterTests = new HtmlConverterTests();
+  
+  final HtmlConverterTests converterTests = HtmlConverterTests();
   converterTests.run();
 }
