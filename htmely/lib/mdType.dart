@@ -4,5 +4,7 @@ enum MdType {
   H3,
   ULI,
   OLI,
-  P
+  P,
+  Start,
+  End
 }

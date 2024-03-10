@@ -13,7 +13,8 @@ enum HtmlTag {
   H3,
   UL,
   OL,
-  P;
+  P,
+  Body;
 
   String getStarting() => switch (this) {
     HtmlTag.H1 => "<h1>",
@@ -22,7 +23,7 @@ enum HtmlTag {
     HtmlTag.UL => "<ul>",
     HtmlTag.OL => "<ol>",
     HtmlTag.P => "<p>",
-
+    _ => throw "Type is not supported for starting!"
   };
 
   String getClosing() => switch (this) {
@@ -32,6 +33,8 @@ enum HtmlTag {
     HtmlTag.UL => "</ul>",
     HtmlTag.OL => "</ol>",
     HtmlTag.P => "</p>",
+    _ => throw "Type is not supported for closing!"
+
   };
 
   static HtmlTag fromMd(MarkdownNode node) => switch (node.mdType) {
@@ -41,6 +44,8 @@ enum HtmlTag {
     MdType.OLI => HtmlTag.OL,
     MdType.ULI => HtmlTag.UL,
     MdType.P => HtmlTag.P,
+    MdType.Start => HtmlTag.Body,
+    MdType.End => HtmlTag.Body
   };
 }
 
@@ -74,7 +79,7 @@ class HtmlConverter {
     }
     
     MarkdownNode last = enumerator.current;
-    openIfNeeded(last, MarkdownNode(mdType: MdType.H1, content: ""), buf);
+    openIfNeeded(last, MarkdownNode(mdType: MdType.Start, content: ""), buf);
     write(last, buf);
 
     while(enumerator.moveNext()) {
@@ -84,6 +89,8 @@ class HtmlConverter {
       write(current, buf);
       last = current;
     }
+
+    closeIfNeeded(MarkdownNode(mdType: MdType.End, content: ""), last, buf);
 
     buf.write(end);
     return buf.toString();
