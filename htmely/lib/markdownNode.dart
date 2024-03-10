@@ -4,5 +4,5 @@ class MarkdownNode {
   final MdType mdType;
   final String content;
 
-  MarkdownNode(this.mdType, this.content);
+  MarkdownNode({required this.mdType, required this.content});
 }
