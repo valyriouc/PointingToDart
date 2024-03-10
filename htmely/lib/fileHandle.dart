@@ -1,10 +1,10 @@
 import "dart:io" as io;
 
-class FileReader {
+class FileHandle {
   
   String content;
 
-  FileReader.fromMarkdown(String markdown) : 
+  FileHandle.fromMarkdown(String markdown) : 
     content = markdown;
 
   Iterable<String> lineIter() => content.split("\n");
@@ -15,9 +15,15 @@ class FileReader {
     }
   }
 
-  static Future<FileReader> fromFile(String filepath) async {
+  static Future<FileHandle> fromFile(String filepath) async {
     return await io.File(filepath).readAsString().then((String content) {
-      return FileReader.fromMarkdown(content);
+      return FileHandle.fromMarkdown(content);
     });
   }
 }
+
+class FileWriter {
+  static Future<void> toFile(String filepath, String content) async {
+    await io.File(filepath).writeAsString(content);
+  }
+} 
