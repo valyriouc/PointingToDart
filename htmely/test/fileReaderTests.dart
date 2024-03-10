@@ -1,16 +1,20 @@
-import 'package:htmely/fileReader.dart';
+import 'package:htmely/fileHandle.dart';
 import 'package:test/test.dart';
 import 'dart:io' as io;
 
 import 'testBase.dart';
 
-class FileReaderTests extends TestBase {
+class FileHandleTests extends TestBase {
   @override
   void run() {
+    _testsForRead();
+  }
+
+  void _testsForRead() {
     group('MarkdownReader', () {
     test('lineIter should split content into lines', () {
       final markdown = 'Line 1\nLine 2\nLine 3';
-      final reader = FileReader.fromMarkdown(markdown);
+      final reader = FileHandle.fromMarkdown(markdown);
 
       final lines = reader
         .lineIter()
@@ -21,7 +25,7 @@ class FileReaderTests extends TestBase {
 
     test('convertToIter should apply converter to each line', () {
       final markdown = '1\n2\n3';
-      final reader = FileReader.fromMarkdown(markdown);
+      final reader = FileHandle.fromMarkdown(markdown);
 
       final numbers = reader.convertToIter<int>((line) => int.parse(line)).toList();
 
@@ -30,7 +34,7 @@ class FileReaderTests extends TestBase {
 
     test('fromFile should read content from a file', () async {
       final tempFile = await io.File('temp_test_file.txt').writeAsString('Hello\nWorld');
-      final reader = await FileReader.fromFile(tempFile.path);
+      final reader = await FileHandle.fromFile(tempFile.path);
 
       final lines = reader.lineIter().toList();
 
@@ -40,5 +44,9 @@ class FileReaderTests extends TestBase {
       await tempFile.delete();
     });
   });
+  }
+
+  void _testsForWrite() {
+
   }
 }
