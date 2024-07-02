@@ -25,3 +25,22 @@ void PrepareDatabase() {
 
   db.dispose();
 }
+
+abstract class DatabaseProvider {
+  late String _dbName;
+
+  String get dbName => _dbName;
+
+  DatabaseProvider(String name) {
+    this._dbName = name;
+  }
+
+  Database produce();
+}
+
+class SqlLiteDatabaseProvider extends DatabaseProvider {
+  SqlLiteDatabaseProvider(super.name);
+
+  @override
+  Database produce() => sqlite3.open(super.dbName);
+}
