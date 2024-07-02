@@ -1,7 +1,7 @@
 import 'package:sqlite3/sqlite3.dart';
 
 void PrepareDatabase() {
-  Database db = sqlite3.openInMemory();
+  Database db = sqlite3.open("./test.db");
   
   db.execute(
     '''
@@ -9,7 +9,7 @@ void PrepareDatabase() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
       email TEXT NOT NULL UNIQUE,
-      password TEXT NOT NULL,
+      password TEXT NOT NULL
     )
   ''');
 
