@@ -16,26 +16,26 @@ class CreateTodoUseCase {
 }
 
 class ShowTodoUseCase {
-  DatabaseProvider provider;
   final String _sql = '''
   SELECT * FROM todo;
   ''';
 
-  int get count => {
-    if (_resultSet is null) {
+  DatabaseProvider provider;
+  late ResultSet? _result;
+
+  int get count {
+    if (_result == null) {
       queryData();
     }
 
-    return this._resultSet!.
-  };
+    return _result!.length;
+  }
 
   ShowTodoUseCase(this.provider);
 
-
-  ResultSet? _resultSet;
   void queryData() {
     Database db = provider.produce();
-    _resultSet = db.select(_sql);
+    _result = db.select(_sql);
     db.dispose();
   }
 }
