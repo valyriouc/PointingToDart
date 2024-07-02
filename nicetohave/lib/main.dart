@@ -45,23 +45,27 @@ class WorkerState extends State<Worker> {
           Row(
             children: 
             [
-              ElevatedButton(onPressed: () {
-
-            	}, 
-              child: const Text("Button1")),
-              ElevatedButton(onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CreationPage()),
-            );
+              ElevatedButton(
+                onPressed: () {
+            	  }, 
+                child: const Text("Button1")
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CreationPage()),
+                  );
               }, 
               child: const Text("Create"))]
             ),
-          Expanded(child: ListView.builder(itemCount: 10, itemBuilder: (context, index) {
-              return const ListTile(
-                title: Text('hello'),
-                subtitle: Text('nice'),
-              );
+          Expanded(
+            child: ListView.builder(
+              itemCount: 10, 
+              itemBuilder: (context, index) {
+                return const ListTile(
+                  title: Text('hello'),
+                  subtitle: Text('nice'));
           }))
         ],)
       );
