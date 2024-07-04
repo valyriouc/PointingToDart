@@ -1,27 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+// TODO: Create a simple create app with some logic 
 
 void main() {
-  runApp(const MainApp());
+  runApp(const JustAnApp());
   
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class JustAnApp extends StatelessWidget {
+  const JustAnApp({super.key});
+
+  @override
+  Widget build(BuildContext context) => DevWidget();
+
+}
+
+class CreationWidget extends StatefulWidget {
+
+  const CreationWidget({super.key});
+
+  @override
+  State<StatefulWidget> createState() => CreationWidgetState();
+  
+}
+
+class CreationEntity {
+
+}
+
+class CreationUseCase {
+  final Map<String, CreationEntity> _entities = <String, CreationEntity>{};
+
+  void AddItem(CreationEntity entitiy) {
+    
+  }
+}
+
+class CreationWidgetState extends State<StatefulWidget> {
+
+  final TextEditingController nameController = TextEditingController();
+  final CreationUseCase creationCase = CreationUseCase();
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: 
+        [
+          Row(children: [
+            TextField(
+              controller: nameController, 
+              onSubmitted: (value) => {
+                if (value.isEmpty) {
 
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: TextButton(
-            style: TextButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 20),
+                }
+              },
             ),
-            onPressed: () { runApp(MaterialApp(home:Scaffold(body: Center(child: Text("You unlocked the secret"),)))); }, 
-            child: const Text("Go for it")),
-        ),
-      ),
+            Text(""),
+            TextButton(onPressed: , child: child)
+          ],)
+        ],
+      )
     );
-   }
+  }
+
 }
